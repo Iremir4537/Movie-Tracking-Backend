@@ -1,7 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import dotenv from 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config({ path: './config/.env'})
 
 const app = express()
 
