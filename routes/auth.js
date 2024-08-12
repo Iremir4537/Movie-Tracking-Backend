@@ -11,7 +11,10 @@ router.post('/register', async (req,res) =>{
 
         if(!userCheck){
             const newUser = await User.create({username,emailaddress,password})
-            res.json(newUser)
+            var token = jwt.sign({ userName:newUser.userName,userId:newUser._id }, process.env.JWTSECRET, { algorithm: 'RS256' },(err,token) => {
+                if(err) throw new Error
+                res.cookie('token',token).json({id:newUser._id,userName:newUser.username})
+            });
         }
         else{            
             res.status(400).json({error:'userexists'})
