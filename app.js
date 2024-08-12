@@ -16,7 +16,10 @@ const app = express()
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(morgan('dev')) //HTTP Request Logger
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    credentials: true, // Allows cookies to be sent
+}))
 
 //Routes
 import authRoute from './routes/auth.js'

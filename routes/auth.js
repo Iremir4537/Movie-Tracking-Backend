@@ -29,8 +29,9 @@ router.post('/login', async (req,res) => {
         const {username,password} = req.body
 
         const user = await User.findOne({username,password})
+        console.log(user)
         if(user){
-            var token = jwt.sign({ userName:user.userName,userId:user._id }, process.env.JWTSECRET, { algorithm: 'RS256' },(err,token) => {
+            var token = jwt.sign({ userName:user.username,userId:user._id }, process.env.JWTSECRET,(err,token) => {
                 if(err) throw new Error
                 res.cookie('token',token).json({id:user._id,userName:user.username})
             });
