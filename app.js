@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import morgan from 'morgan'
+import cors from 'cors'
 dotenv.config({ path: './config/.env'})
 
 //DB Connection
@@ -15,6 +16,7 @@ const app = express()
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(morgan('dev')) //HTTP Request Logger
+app.use(cors())
 
 //Routes
 import authRoute from './routes/auth.js'
